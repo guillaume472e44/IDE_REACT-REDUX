@@ -1,0 +1,148 @@
+*,
+::before,
+::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  padding: 80px 32px;
+}
+
+.global-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 1280px;
+  min-height: 512px;
+  border: 8px solid rgba(128, 128, 128, 0.48);
+  margin: auto;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* HEADER */
+
+.header-container {
+  background: #363636;
+  padding: 16px 32px;
+  display: flex;
+}
+
+.left-side {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-basis: 50%;
+  /* border-right: 1px solid gray; */
+}
+.right-side {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-basis: 50%;
+}
+
+.lang-tabs,
+.download-code {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background: inherit;
+  gap: 8px;
+  cursor: pointer;
+
+  &.js:hover {
+    color: #ffdf00;
+  }
+
+  &.css {
+    margin-left: auto;
+    &:hover {
+      color: #2196f3;
+    }
+  }
+
+  &.html {
+    margin-inline: 32px;
+    &:hover {
+      color: #fc490b;
+    }
+  }
+
+  &.download-code:hover {
+    text-decoration: underline;
+    text-underline-offset: 12px;
+    text-decoration-thickness: 2px;
+  }
+}
+
+/* DISPLAYER */
+.global-displayer {
+  display: flex;
+  flex-grow: 1;
+}
+
+.code-editor {
+  background: #1d1d1d;
+  flex-basis: 50%;
+  border-right: 1px solid rgba(128, 128, 128, 0.48);
+  padding: 16px 8px;
+  display: flex;
+  overflow: hidden;
+}
+.lineNumbers {
+  width: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+
+.lineCode-container {
+  position: relative;
+  width: 100%;
+  font-family: monospace;
+  font-size: large;
+}
+
+.lineCode--input,
+.lineCode--displayer {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: inherit;
+  padding-inline: 16px;
+}
+.lineCode--input {
+  z-index: 10;
+  color: transparent;
+  caret-color: aqua;
+  &:focus {
+    outline: none;
+  }
+}
+.lineCode--displayer {
+  background-color: transparent;
+}
+.code-input {
+  color: white;
+  display: flex;
+  width: max-content;
+  height: 24px;
+
+  & .keyWord {
+    color: orange;
+  }
+
+  & .numbers {
+    color: aquamarine;
+  }
+
+  & .punctuation {
+    color: rgb(71, 160, 255);
+  }
+
+  & .return {
+    color: rgb(200, 0, 200);
+  }
+}
