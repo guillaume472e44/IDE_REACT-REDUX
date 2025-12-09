@@ -1,38 +1,47 @@
-import { useSelector } from "react-redux";
-import JSCodeInput from "../features/jsCodeInput/JSCodeInput";
+import { useRef, useEffect, useState, useCallback } from "react";
 
 export default function CodeEditor() {
-  const lines = useSelector((state) => state.jsCodeInputSlice.jsLinesCode);
+  const inputRef = useRef(null);
+  const coloredInput = useRef(null);
 
-  function wordColorFormat(line) {
-    // const regexConservation = /[^\s.,!?;:()"'«»\-–—]+|[.,!?;:()"'«»\-–—]/g;
-    const regexSplit = /[^\s.,!?;:(){}"'«»\-–—]+|[\s.,!?;:(){}"'«»\-–—]/g;
-    const wordSplit = line.match(regexSplit);
+  const [code, setCode] = useState("");
 
-    const format = wordSplit.map((word, index) => {
-      let colorSyntax = "";
-      if (/function|const|let/.test(word)) {
-        colorSyntax = "keyWord";
-      } else if (/\d/.test(word)) {
-        colorSyntax = "numbers";
-      } else if (/[{}()'"]/.test(word)) {
-        colorSyntax = "punctuation";
-      } else if (word === "return") {
-        colorSyntax = "return";
-      }
+  // --- Logique de Coloration ---
+  const applySyntaxHighlighting = useCallback((text) => {
+    let formattedText = text
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
 
-      return word === " " ? (
-        <span key={`word-input-${index}`} className={`${colorSyntax}`}>
-          {word}&nbsp;
-        </span>
-      ) : (
-        <span key={`word-input-${index}`} className={`${colorSyntax}`}>
-          {word}
-        </span>
-      );
-    });
-    return format;
+    // Colore les mots-clés simples
+    const keywords = /(const|let|function|if|else)/g;
+    const punctuation = /("|'\(|\)|{|})/g;
+    formattedText = formattedText.replace(
+      keywords,
+      '<span class="keyWord">$&</span>'
+    );
+
+    return formattedText;
+  }, []);
+
+  // --- Fonction de Synchronisation du Défilement ---
+  const handleScroll = () => {
+    if (inputRef.current && coloredInput.current) {
+      // Synchronisation : lorsque l'input (textarea) défile, la div doit suivre
+      coloredInput.current.scrollTop = inputRef.current.scrollTop;
+      coloredInput.current.scrollLeft = inputRef.current.scrollLeft;
+    }
+  };
+
+  function handleChange(e) {
+    setCode(e.currentTarget.value);
   }
+
+  useEffect(() => {
+    if (coloredInput.current) {
+      coloredInput.current.innerHTML = applySyntaxHighlighting(code);
+    }
+  }, [applySyntaxHighlighting, code]);
 
   return (
     <div className="code-editor">
@@ -45,16 +54,16 @@ export default function CodeEditor() {
         <span>6</span>
         <span>7</span>
       </div>
-
       <div className="lineCode-container">
-        <JSCodeInput />
-        <div className="lineCode--displayer">
-          {lines.map((line, index) => (
-            <div className="code-input" key={`line-input-${index}`}>
-              {wordColorFormat(line)}
-            </div>
-          ))}
-        </div>
+        <div className="lineCode--displayer" ref={coloredInput}></div>
+        <textarea
+          className="lineCode--input"
+          ref={inputRef}
+          value={code}
+          onChange={handleChange}
+          onScroll={handleScroll}
+          spellCheck="false"
+        ></textarea>
       </div>
     </div>
   );

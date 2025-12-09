@@ -89,7 +89,6 @@ body {
   border-right: 1px solid rgba(128, 128, 128, 0.48);
   padding: 16px 8px;
   display: flex;
-  overflow: hidden;
 }
 .lineNumbers {
   width: 24px;
@@ -101,20 +100,27 @@ body {
 .lineCode-container {
   position: relative;
   width: 100%;
-  font-family: monospace;
-  font-size: large;
+  white-space: pre-wrap;
+  overflow: auto;
 }
 
 .lineCode--input,
 .lineCode--displayer {
+  font-family: monospace;
+  font-size: large;
   position: absolute;
+  line-height: 1.5;
   top: 0px;
   left: 0px;
   width: inherit;
+  height: 100%;
   padding-inline: 16px;
 }
 .lineCode--input {
-  z-index: 10;
+  border: none;
+  resize: none;
+  z-index: 2;
+  background-color: transparent;
   color: transparent;
   caret-color: aqua;
   &:focus {
@@ -122,27 +128,15 @@ body {
   }
 }
 .lineCode--displayer {
-  background-color: transparent;
-}
-.code-input {
-  color: white;
-  display: flex;
-  width: max-content;
-  height: 24px;
+  /* background-color: transparent; */
+  color: whitesmoke;
+  z-index: 1;
 
   & .keyWord {
     color: orange;
   }
 
-  & .numbers {
-    color: aquamarine;
-  }
-
   & .punctuation {
     color: rgb(71, 160, 255);
-  }
-
-  & .return {
-    color: rgb(200, 0, 200);
   }
 }
