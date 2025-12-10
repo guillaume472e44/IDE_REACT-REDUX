@@ -8,6 +8,8 @@ export default function CodeEditor() {
 
   // --- Logique de Coloration ---
   const applySyntaxHighlighting = useCallback((text) => {
+    console.log(text.split(/^\s.,"'\(\){}+/g | /\s.,"'\(\){}/g));
+
     let formattedText = text
       .replace(/&/g, "&amp;")
       .replace(/</g, "&lt;")
@@ -61,7 +63,7 @@ export default function CodeEditor() {
           ref={inputRef}
           value={code}
           onChange={handleChange}
-          onScroll={handleScroll}
+          // onScroll={handleScroll}
           spellCheck="false"
         ></textarea>
       </div>
