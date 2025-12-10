@@ -139,4 +139,8 @@ body {
   & .punctuation {
     color: rgb(71, 160, 255);
   }
+
+  & .numbers {
+    color: aquamarine;
+  }
 }
