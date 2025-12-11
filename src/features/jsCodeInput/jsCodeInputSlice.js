@@ -1,24 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  jsLinesCode: [" "],
+  code: ``,
 };
 
 const jsCodeInputSlice = createSlice({
   name: "code_input",
   initialState,
   reducers: {
-    setLines: (state, action) => {
-      state.jsLinesCode[action.payload.index] = action.payload.text;
-      state.jsLinesCode.forEach((line, index) => {
-        line.length === 0 && state.jsLinesCode.splice(index, 1);
-      });
-    },
-    addLine: (state, action) => {
-      state.jsLinesCode.push(" ");
+    updateCode: (state, action) => {
+      state.code = action.payload;
     },
   },
 });
 
-export const { setLines, addLine } = jsCodeInputSlice.actions;
+export const { updateCode } = jsCodeInputSlice.actions;
 export default jsCodeInputSlice.reducer;
