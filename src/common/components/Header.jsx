@@ -1,21 +1,33 @@
+import { useDispatch } from "react-redux";
+import { setCurrent } from "../../features/codeInput/codeInputSlice";
 import JSlogo from "../../assets/js.svg";
 import CSSlogo from "../../assets/css.svg";
 import HTMLlogo from "../../assets/html.svg";
 import DOWNLOADlogo from "../../assets/download.svg";
 
 export default function Header() {
+  const dispatch = useDispatch();
   return (
     <div className="header-container">
       <div className="left-side">
-        <button className="lang-tabs js">
+        <button
+          onClick={() => dispatch(setCurrent("codeJS"))}
+          className="lang-tabs js"
+        >
           <img src={JSlogo} alt="logo javascript" width={16} height={16} />
           <span>script.js</span>
         </button>
-        <button className="lang-tabs css">
+        <button
+          onClick={() => dispatch(setCurrent("codeCSS"))}
+          className="lang-tabs css"
+        >
           <img src={CSSlogo} alt="logo css" width={16} height={16} />
           <span>style.css</span>
         </button>
-        <button className="lang-tabs html">
+        <button
+          onClick={() => dispatch(setCurrent("codeHTML"))}
+          className="lang-tabs html"
+        >
           <img src={HTMLlogo} alt="logo html" width={16} height={16} />
           <span>index.html</span>
         </button>

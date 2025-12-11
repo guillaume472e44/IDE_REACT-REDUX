@@ -1,6 +1,6 @@
-export function applySyntaxHighlighting(text) {
+export function applySyntaxHighlighting({ code, lang }) {
   // Échappement HTML des caractères spéciaux (<, >, &)
-  let formattedText = text
+  const formattedText = code
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;");
@@ -17,7 +17,7 @@ export function applySyntaxHighlighting(text) {
   // Coloration simple (mots clé, nombres et ponctuation)
   const keywords = /(const|let|function|if|else)/;
   const punctuation = /[(){}'"[\]]/;
-  let currentLineNumber = 1;
+
   const formateCode = codeSplit?.map((input) => {
     if (keywords.test(input)) {
       return `<span class="keyWord">${input}</span>`;
@@ -25,14 +25,13 @@ export function applySyntaxHighlighting(text) {
       return `<span class="punctuation">${input}</span>`;
     } else if (/\d/.test(input)) {
       return `<span class="numbers">${input}</span>`;
-    } else if (/\n/.test(input)) {
-      currentLineNumber++;
-      return input;
+    } else if (input === "return") {
+      return `<span class="return">${input}</span>`;
+    } else {
+      input = `<span class="default">${input}</span>`;
     }
     return input;
   });
-  // setLigneNumber(currentLineNumber);
+
   return formateCode ? formateCode.join("") : "";
 }
-
-
