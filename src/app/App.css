@@ -21,7 +21,7 @@ body {
   overflow: hidden;
 }
 
-/* HEADER */
+/* *** *** *** *** HEADER *** *** *** *** */
 
 .header-container {
   background: #363636;
@@ -71,18 +71,31 @@ body {
     }
   }
 
+  &.js.active,
+  &.css.active,
+  &.html.active {
+    text-decoration: underline;
+    text-underline-offset: 14px;
+    text-decoration-thickness: 4px;
+    text-decoration-color: rgb(160, 255, 255);
+  }
+
   &.download-code:hover {
+    color: rgb(205, 205, 205);
     text-decoration: underline;
     text-underline-offset: 12px;
     text-decoration-thickness: 2px;
   }
 }
 
-/* DISPLAYER */
+/* *** *** *** *** DISPLAYER *** *** *** ***  */
+
 .global-displayer {
   display: flex;
   flex-grow: 1;
 }
+
+/* code displayer */
 
 .code-editor {
   background: #1d1d1d;
@@ -96,6 +109,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: end;
+  color: white;
 }
 
 .lineCode-container {
@@ -131,22 +145,63 @@ body {
   }
 }
 .lineCode--displayer {
-  color: rgb(200, 200, 200);
+  color: rgb(180, 180, 180);
   z-index: 1;
 
-  & .keyWord {
-    color: orange;
+  & .js-keywords {
+    color: violet;
   }
 
-  & .punctuation {
+  & .js-punctuation {
     color: rgb(71, 160, 255);
   }
 
-  & .numbers {
+  & .js-string {
+    color: rgb(0, 255, 0);
+  }
+
+  & .js-numbers {
     color: aquamarine;
   }
 
   & .return {
+    color: rgb(255, 0, 195);
+  }
+
+  & .css-class {
+    color: orange;
+  }
+
+  & .css-punctuation {
     color: violet;
   }
+
+  & .css-numbers {
+    color: aquamarine;
+  }
+
+  & .html-default {
+    color: white;
+  }
+
+  & .html-keywords {
+    color: rgb(255, 108, 108);
+  }
+
+  & .html-attributs {
+    color: orange;
+  }
+
+  & .html-numbers {
+    color: chartreuse;
+  }
+
+  & .html-strings {
+    color: rgb(108, 255, 108);
+  }
+
+  & .html-punctuation {
+    color: #2196f3;
+  }
 }
+/*  */
