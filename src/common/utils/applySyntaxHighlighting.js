@@ -1,4 +1,4 @@
-import { syntaxesParams, subDivisionFormatting } from "./syntaxesParams";
+import { syntaxesParams } from "./syntaxesParams";
 
 export function applySyntaxHighlighting({ code, lang }) {
   let stylisedCode;
@@ -21,6 +21,7 @@ export function applySyntaxHighlighting({ code, lang }) {
       return input;
     });
   } else {
+    // Code HTML
     const codeSplit = code.match(syntaxesParams.codeHTML.tokenSplit);
 
     stylisedCode = codeSplit?.map((split) => {
@@ -46,6 +47,21 @@ export function applySyntaxHighlighting({ code, lang }) {
           : `<span class="html-default">${split}</span>`;
     });
   }
-
   return stylisedCode ? stylisedCode.join("") : "";
+}
+
+function subDivisionFormatting(splittedSubCode) {
+  const subSplitFormatted = splittedSubCode.map((subSplit) => {
+    for (const syntax of syntaxesParams.codeHTML.highlightedSyntaxes) {
+      if (syntax.regexTest.test(subSplit)) {
+        subSplit = subSplit.replace(
+          syntax.regex,
+          (match) => `<span class=${syntax.class}>${match}</span>`
+        );
+        return subSplit;
+      }
+    }
+    return subSplit;
+  });
+  return subSplitFormatted.join("");
 }

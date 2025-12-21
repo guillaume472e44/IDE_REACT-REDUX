@@ -7,6 +7,10 @@
 }
 body {
   padding: 80px 32px;
+
+  @media screen and (width < 1280px) {
+    padding: 32px 16px;
+  }
 }
 
 .global-container {
@@ -16,17 +20,33 @@ body {
   min-height: 512px;
   max-height: 720px;
   border: 8px solid rgba(128, 128, 128, 0.48);
-  margin: auto;
+  margin: 0 auto;
   border-radius: 16px;
-  overflow: hidden;
+  /* overflow: hidden; */
+  box-shadow: -8px 16px 32px 2px #0000003b;
+  overflow-y: auto;
+
+  @media screen and (width < 1920px) {
+    margin: 0 0 0 256px;
+  }
+
+  @media screen and (width < 1280px) {
+    min-height: 720px;
+  }
 }
 
 /* *** *** *** *** HEADER *** *** *** *** */
 
 .header-container {
   background: #363636;
-  padding: 16px 32px;
+  padding: 16px;
   display: flex;
+
+  @media screen and (width < 1280px) {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
 }
 
 .left-side {
@@ -49,6 +69,7 @@ body {
   justify-content: center;
   align-items: center;
   border: none;
+  color: whitesmoke;
   background: inherit;
   gap: 8px;
   cursor: pointer;
@@ -58,14 +79,17 @@ body {
   }
 
   &.css {
-    margin-left: auto;
+    padding-inline: 16px;
+    margin-inline: 16px;
+    border-left: 2px dotted gray;
+    border-right: 2px dotted gray;
     &:hover {
       color: #2196f3;
     }
   }
 
   &.html {
-    margin-inline: 32px;
+    /* margin-inline: 32px; */
     &:hover {
       color: #fc490b;
     }
@@ -86,6 +110,16 @@ body {
     text-underline-offset: 12px;
     text-decoration-thickness: 2px;
   }
+
+  @media screen and (width < 800px) {
+    span {
+      display: none;
+    }
+
+    /* &.html {
+      margin-inline: auto;
+    } */
+  }
 }
 
 /* *** *** *** *** DISPLAYER *** *** *** ***  */
@@ -93,9 +127,13 @@ body {
 .global-displayer {
   display: flex;
   flex-grow: 1;
+
+  @media screen and (width < 1280px) {
+    flex-direction: column;
+  }
 }
 
-/* code displayer */
+/* Code-Editor */
 
 .code-editor {
   background: #1d1d1d;
@@ -103,6 +141,13 @@ body {
   border-right: 1px solid rgba(128, 128, 128, 0.48);
   padding: 16px 8px;
   display: flex;
+
+  @media screen and (width < 1280px) {
+    order: 1;
+    border: none;
+    /* margin-top: auto; */
+    flex-grow: 1;
+  }
 }
 .lineNumbers {
   width: 24px;
@@ -116,7 +161,7 @@ body {
   position: relative;
   width: 100%;
   white-space: break-spaces;
-  overflow: auto;
+  /* overflow: auto; */
 }
 
 .lineCode--input,
@@ -204,4 +249,166 @@ body {
     color: #2196f3;
   }
 }
-/*  */
+
+/* Code-displayer */
+.code-displayer {
+  flex-basis: calc(50% - 16px);
+  border-radius: 16px;
+  margin: 8px auto;
+  background-color: #1e1e1e;
+  border: 1px solid #2d2d2d;
+  box-shadow: -2px 2px 6px #161616, 1px -1px 8px #363636;
+  padding: 16px;
+  height: 440px;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 8px;
+  z-index: 10;
+  gap: 24px;
+
+  @media screen and (width < 1280px) {
+    width: calc(100% - 16px);
+    height: 360px;
+    padding: 15px;
+    top: 48px;
+  }
+}
+.screen {
+  background-color: #313131;
+  border-radius: 8px;
+  height: 360px;
+  /* box-shadow: inset -2px 2px 6px #161616, inset 2px -2px 6px #363636; */
+  /* padding: 8px; */
+  overflow-y: auto;
+  color: rgb(180, 180, 180);
+  display: flex;
+
+  & iframe {
+    border: none;
+    width: 100%;
+    /* height: 100%; */
+  }
+
+  @media screen and (width < 1280px) {
+    height: 280px;
+  }
+}
+
+.run-code {
+  margin-top: auto;
+  border: none;
+  width: 80px;
+  height: 24px;
+  /* padding-block: 4px; */
+  cursor: pointer;
+  border-radius: 4px;
+  background: #424242;
+  transition: box-shadow 0.02s ease-out;
+  box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.1) inset,
+    0 0 0 1px rgba(0, 0, 0, 0.25), 0 -1px 0 0 rgba(0, 0, 0, 0.7) inset,
+    0 1px 2px 1px rgba(0, 0, 0, 0.25);
+
+  &:active {
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.7) inset,
+      0 1px 0 0 rgba(255, 255, 255, 0.05),
+      0 1px 2px 1px rgba(0, 0, 0, 0.6) inset;
+  }
+
+  position: relative;
+  &::before {
+    content: "run code";
+    position: absolute;
+    width: 100%;
+    top: -75%;
+    left: 0;
+    font-family: "Segoe UI", sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: gray;
+  }
+}
+
+/* *** *** *** *** LIBRARY *** *** *** ***  */
+
+.library-container {
+  position: absolute;
+  background: #1a1a1a;
+  z-index: 12;
+  height: 100%;
+  width: 256px;
+  top: 0;
+  left: 0;
+  padding-block: 80px;
+  /* padding-inline-start: 8px; */
+}
+
+.empty-project {
+  background-color: crimson;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  padding-block: 8px;
+  margin-block-start: 16px;
+  margin-block-end: 8px;
+  margin-inline: 8px;
+  width: calc(100% - 16px);
+
+  &:hover {
+    background-color: rgba(220, 20, 60, 0.75);
+  }
+}
+
+.toggle-library {
+  display: flex;
+  align-items: center;
+  border: none;
+  width: 100%;
+  padding-block: 4px;
+  padding-inline: 8px;
+  margin-block-end: 1px;
+  gap: 8px;
+  color: rgb(160, 160, 160);
+  cursor: pointer;
+
+  span {
+    font-size: 1rem;
+  }
+}
+.chevron-library {
+  margin-inline-start: auto;
+  transform: rotate(0);
+  transition: transform 0.1s linear;
+
+  &.active {
+    transform: rotate(-90deg);
+  }
+}
+
+.algorithm-list {
+  margin-inline-start: 16px;
+  padding-inline-start: 32px;
+  border-left: 1px solid gray;
+
+  ul > li {
+    list-style-image: url(../assets/fileCode.svg);
+  }
+}
+.algorithm-btn {
+  border: none;
+  background: inherit;
+  font-size: 1rem;
+  color: gray;
+  width: 100%;
+  text-align: start;
+  cursor: pointer;
+  padding-block: 4px;
+  margin-block: 1px;
+
+  &:hover,
+  &:focus {
+    background: #323232;
+    color: rgb(176, 176, 176);
+  }
+}

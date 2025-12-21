@@ -1,15 +1,21 @@
 import Header from "../common/components/Header";
 import CodeEditor from "../common/CodeEditor";
+import CodeDisplayer from "../common/CodeDisplayer";
+import Library from "../common/Library";
 import "./App.css";
 
 function App() {
   return (
-    <div className="global-container">
-      <Header />
-      <div className="global-displayer">
-        <CodeEditor />
+    <>
+      <Library />
+      <div className="global-container">
+        <Header />
+        <div className="global-displayer">
+          <CodeEditor />
+          <CodeDisplayer />
+        </div>
       </div>
-    </div>
+    </>
   );
 }
 

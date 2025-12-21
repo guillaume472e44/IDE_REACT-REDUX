@@ -1,14 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  codeJS: `// Fichier JavaScript`,
-  codeCSS: `/* Fichier CSS */`,
-  codeHTML: `<!-- Fichier HTML -->
-<span>457</span>
-<div class="rfrf"></div>
-<a id="proutiprouta" class="ma-class">
-<p>texte</p>`,
-  currentCode: "codeJS",
+  codeJS: `// JavaScript File`,
+  codeCSS: `/* CSS File */`,
+  codeHTML: `<!-- HTML File -->`,
+  currentCode: "codeHTML",
 };
 
 const codeInputSlice = createSlice({
@@ -21,8 +17,11 @@ const codeInputSlice = createSlice({
     setCurrent: (state, action) => {
       state.currentCode = action.payload;
     },
+    emptyProject: (state, action) => {
+      return { ...initialState };
+    },
   },
 });
 
-export const { updateCode, setCurrent } = codeInputSlice.actions;
+export const { updateCode, setCurrent, emptyProject } = codeInputSlice.actions;
 export default codeInputSlice.reducer;
