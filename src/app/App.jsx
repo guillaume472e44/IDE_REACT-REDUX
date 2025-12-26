@@ -8,7 +8,7 @@ function App() {
   return (
     <>
       <Library />
-      <div className="global-container">
+      <div className="global-editor-container">
         <Header />
         <div className="global-displayer">
           <CodeEditor />

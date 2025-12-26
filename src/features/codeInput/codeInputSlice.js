@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   codeJS: `// JavaScript File`,
   codeCSS: `/* CSS File */`,
-  codeHTML: `<!-- HTML File -->`,
+  codeHTML: `<!-- HTML File -->
+<!-- No need !doctype, html and head tags. -->`,
   currentCode: "codeHTML",
 };
 

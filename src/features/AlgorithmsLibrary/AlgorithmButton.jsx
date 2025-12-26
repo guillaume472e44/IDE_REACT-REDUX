@@ -17,6 +17,7 @@ export default function AlgorithmButton({ content }) {
         codeJS: content.codeJS,
       })
     );
+
   }
 
   return (

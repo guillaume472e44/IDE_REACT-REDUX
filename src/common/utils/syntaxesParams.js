@@ -1,12 +1,12 @@
 export const syntaxesParams = {
   codeJS: {
-    tokenSplit: /"(.*?)"|[^\s.,!?;:(){}'«»\-–—]+|[\s.,!?;:(){}'«»\-–—]/g,
+    tokenSplit: /"(.*?)"|[^\s.,!?;:(){}'«»\-–—\d]+|[\s.,!?;:(){}'«»\-–—\d]/g,
     highlightedSyntaxes: [
       { class: "js-string", regex: /"(.*?)"/ },
-      { class: "js-keywords", regex: /(const|let|function|if|else)/ },
+      { class: "js-keywords", regex: /(const|let|function|if|else|for|while|try|catch)/ },
       { class: "js-punctuation", regex: /[(){}'[\]]/g },
-      { class: "js-numbers", regex: /^\d/ },
       { class: "return", regex: "return" },
+      { class: "js-numbers", regex: /^\d/ },
     ],
   },
   codeCSS: {
@@ -18,7 +18,7 @@ export const syntaxesParams = {
     ],
   },
   codeHTML: {
-    tokenSplit: /<(.*?)>|\w+|\s|[,!?;:(){}"'\-–—[\]<>=/.]/g,
+    tokenSplit: /<(.*?)>|\w+|\s|[,!?;:(){}"'\-–—[\]<>=/.°+%]/g,
     subTokenSplit:
       /"(.*?)"|&lt;\w+|&lt;\/\w+|\w+|\s|&lt;|&gt;|[,!?;:(){}"'\-–—[\]|=/.]/g,
     highlightedSyntaxes: [
@@ -30,12 +30,12 @@ export const syntaxesParams = {
       {
         class: "html-keywords",
         regexTest: /&lt;\w+|&lt;\/\w+/,
-        regex: /(p|a|body|main|div|span|section|article|img|h1|h2|h3|h4|h5|h6|label|input)/g,
+        regex: /(p|a|body|main|div|span|section|article|img|h1|h2|h3|h4|h5|h6|label|input|button)/g,
       },
       {
         class: "html-attributs",
         regexTest: /\w+/,
-        regex: /(id|href|type|src|class|for|value)/g,
+        regex: /(id|href|type|src|class|for|value|min|max|step)/g,
       },
       {
         class: "html-punctuation",

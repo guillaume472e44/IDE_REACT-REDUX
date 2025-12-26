@@ -1,29 +1,34 @@
 import { useState } from "react";
 import { list } from "../features/AlgorithmsLibrary/algorithmsLibraryIndex";
+import ToggleLibrary from "./components/ToggleLibrary";
+import ToggleList from "./components/ToggleList";
 import EmptyProject from "../features/emptyProject/EmptyProject";
 import AlgorithmBtn from "../features/AlgorithmsLibrary/AlgorithmButton";
-import folderCode from "../assets/folderCode.svg";
-import leftChevron from "../assets/leftChevron.svg";
 
 export default function Library() {
-  const [toggleList, setToggleList] = useState(false);
+  const [toggleList, setToggleList] = useState(true);
+  const [toggleLibrary, setToggleLibrary] = useState(true);
+
+  list.sort((a, b) => {
+    const nameA = a.name.toUpperCase();
+    const nameB = b.name.toUpperCase();
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+    return 0;
+  });
+
   return (
-    <div className="library-container">
+    <div className={`library-container ${toggleLibrary ? "active" : ""} `}>
+      <ToggleLibrary
+        setToggleLibrary={setToggleLibrary}
+        toggleLibrary={toggleLibrary}
+      />
       <EmptyProject />
-      <button
-        onClick={() => setToggleList(!toggleList)}
-        className="toggle-library"
-      >
-        <img src={folderCode} alt="folder code icon" width={16} height={16} />
-        <span>Algorithms library</span>
-        <img
-          src={leftChevron}
-          alt="chevron"
-          width={24}
-          height={24}
-          className={`chevron-library ${toggleList ? "active" : ""}`}
-        />
-      </button>
+      <ToggleList setToggleList={setToggleList} toggleList={toggleList} />
       {toggleList && (
         <div className="algorithm-list">
           <ul>
