@@ -781,7 +781,7 @@ span:last-of-type { font-style: italic }
  animation: animate 8s alternate infinite linear;
 }
 
-@keyframes animate { to { top: calc(100% - 80px) }
+@keyframes animate { to { top: calc(100% - 80px) } }
 `,
     codeJS: `// JavaScript File`,
   },
